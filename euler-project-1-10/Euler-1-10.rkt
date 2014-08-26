@@ -39,6 +39,11 @@
       (if (= 1(length lBoo)) (car lBoo)
           (andApply (cdr lBoo)))))
 
+(define (skipRange skip a n)
+  (if (< a n) (cons a (skipRange skip (+ a skip) n))
+      (cons n '())))
+
+
 ;solutions
 (define (e1 n x) 
   (if (= 0 n) x 
@@ -75,5 +80,13 @@
 ;solved this one by hand
 (define e8 (* 5 5 7 6 6 8 9 6 6 4 8 9 5))
 
+(define (e9 a b)
+  (cond [(= 1000 (+ a b (sqrt (+ (* a a) (* b b)))))
+         (cons a (cons b (cons (sqrt (+ (* a a) (* b b))) '())))]
+        [(< a b) (e9 (inc a) b)]
+        [else (e9 0 (inc b))]))
 
+;142913828922
+(define e10 (apply + (filter prime? (skipRange 3 2 2000000))))
+  
 
